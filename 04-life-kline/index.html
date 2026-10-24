@@ -7,7 +7,7 @@
 <style>
   :root{
     --paper:#F4F1E8; --ink:#16161A; --ink2:#5A5A64; --card:#FFFDF6;
-    --hazard:#FFB800; --red:#C0392B; --up:#E0433B; --down:#0E8A4E;
+    --hazard:#FFB800; --red:#C0392B; --up:#E0433B; --down:#0E8A4E; --ai:#7C5CFC;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
     --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   }
@@ -33,7 +33,6 @@
   .blk h3 i{font-style:normal;font-family:var(--mono);font-size:10px;background:var(--ink);color:var(--paper);border-radius:4px;padding:2px 6px;letter-spacing:.05em}
   .blk .sub{font-size:11.5px;color:var(--ink2);margin-bottom:10px}
 
-  /* 出生年 */
   .birth{display:flex;align-items:center;gap:10px}
   .birth label{font-size:13px;color:var(--ink2);white-space:nowrap}
   #birth{width:96px;border:2.5px solid var(--ink);border-radius:10px;padding:9px 10px;font-size:16px;font-family:var(--mono);
@@ -41,7 +40,6 @@
   #birth:focus{border-color:var(--hazard-d);box-shadow:0 0 0 4px rgba(255,184,0,.3)}
   .birth .hint{font-size:11px;color:var(--ink2)}
 
-  /* 共性事件点选 */
   .grp{margin-bottom:9px}
   .grp .gt{font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:6px;letter-spacing:.02em}
   .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -51,7 +49,6 @@
   .chip.on{background:var(--ink);color:var(--paper)}
   .chip.on small{color:#B9BDC7}
 
-  /* 自选大事 */
   .row{display:flex;align-items:center;gap:7px;margin-bottom:8px}
   .row input{border:2px solid var(--ink);border-radius:9px;padding:8px 9px;font-size:14px;font-family:var(--sans);background:#fff;outline:none;min-width:0}
   .row input.yr{width:64px;text-align:center;font-family:var(--mono)}
@@ -63,13 +60,12 @@
   .row .dir.down{background:#E3F4E9;color:var(--down)}
   .row .del{width:29px;height:29px;border:2px solid var(--ink);border-radius:8px;background:#fff;cursor:pointer;font-size:12px;flex-shrink:0;font-family:var(--sans)}
   .row .del:active{transform:scale(.92)}
-  #addBtn{width:100%;border:2px dashed var(--ink);background:#fff;border-radius:10px;padding:8px;font-size:13px;
+  #addBtn,#addPlanBtn{width:100%;border:2px dashed var(--ink);background:#fff;border-radius:10px;padding:8px;font-size:13px;
     cursor:pointer;font-family:var(--sans);font-weight:600}
-  #addBtn:active{background:#FFF6DF}
+  #addBtn:active,#addPlanBtn:active{background:#FFF6DF}
   .row.plan input.ev{border-style:dashed}
   .row.plan .dir{background:#EFEAFB;color:#5B3FC4}
 
-  /* 图表区 */
   .chartbox{background:#10141C;border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:12px}
   #chart{width:100%;height:auto;display:block;border-radius:8px}
   .legend{display:flex;gap:12px;align-items:center;margin-top:10px;font-family:var(--mono);font-size:10.5px;color:#8B93A3;flex-wrap:wrap}
@@ -84,6 +80,29 @@
   .read .tag{display:inline-block;font-family:var(--mono);font-size:10px;border-radius:4px;padding:2px 7px;margin-right:8px;letter-spacing:.05em;color:#fff}
   .read.past .tag{background:var(--ink)}
   .read.future .tag{background:#5B3FC4}
+
+  /* ── AI 推演区 ── */
+  .ai-box{margin-top:12px;background:#F6F2FF;border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:14px 15px}
+  .ai-box h3{font-size:14px;display:flex;align-items:center;gap:8px;margin-bottom:3px}
+  .ai-box h3 .sp{font-size:15px}
+  .ai-box .sub{font-size:11.5px;color:var(--ink2);margin-bottom:10px}
+  .ai-row{display:flex;gap:8px;flex-wrap:wrap}
+  #aiBtn{flex:1;min-width:180px;border:2.5px solid var(--ink);border-radius:12px;background:var(--ai);color:#fff;
+    font-size:15.5px;font-weight:800;padding:13px 8px;cursor:pointer;font-family:var(--sans);box-shadow:3px 3px 0 var(--ink)}
+  #aiBtn:active{transform:translate(2px,2px);box-shadow:none}
+  #aiBtn:disabled{opacity:.55;cursor:wait;box-shadow:none}
+  #modelSel{border:2px solid var(--ink);border-radius:10px;background:#fff;font-size:12.5px;font-family:var(--sans);
+    padding:10px 8px;max-width:200px;outline:none;cursor:pointer}
+  .ai-out{margin-top:12px;display:none}
+  .ai-out.on{display:block;animation:pop .3s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+  .ai-str{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+  .ai-str .s{background:#fff;border:2px solid var(--ai);color:#3D2BC4;border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600}
+  .ai-guide{background:#fff;border:2px solid var(--ink);border-radius:11px;padding:11px 13px;font-size:14px;line-height:1.75}
+  .ai-note{font-family:var(--mono);font-size:10px;color:#8A7BC8;margin-top:8px;line-height:1.6}
+  .ai-ms{margin-top:10px;font-size:12px;color:#5B3FC4;line-height:1.7}
+  .ai-ms b{color:#3D2BC4}
+
   #saveBtn{margin-top:12px;width:100%;border:2.5px solid var(--ink);border-radius:13px;background:var(--hazard);
     font-size:17px;font-weight:800;padding:15px 8px;cursor:pointer;font-family:var(--sans);box-shadow:4px 4px 0 var(--ink)}
   #saveBtn:active{transform:translate(3px,3px);box-shadow:none}
@@ -129,8 +148,8 @@
     </div>
 
     <div class="blk">
-      <h3><i>STEP 3</i>未来计划<span style="margin-left:auto;font-size:11px;color:var(--ink2);font-weight:400">画成虚线，由你执笔</span></h3>
-      <p class="sub">不是预测运势，是你打算干的事。</p>
+      <h3><i>STEP 3</i>当下的目标 / 计划<span style="margin-left:auto;font-size:11px;color:var(--ink2);font-weight:400">AI 推演会参考它</span></h3>
+      <p class="sub">不是预测运势，是你打算干的事。填 1-3 个，推演更准。</p>
       <div id="plans"></div>
       <button id="addPlanBtn">＋ 加一个计划</button>
     </div>
@@ -143,7 +162,7 @@
         <span><i style="background:var(--up)"></i>阳线 · 高点</span>
         <span><i style="background:var(--down)"></i>阴线 · 低点</span>
         <span><i style="background:#E8B93B"></i>五年均线</span>
-        <span class="dash" style="border-color:#B9A6E8"></span>虚线 · 未来计划
+        <span class="dash" style="border-color:#B9A6E8"></span>虚线 · 计划/推演
         <span style="margin-left:auto">起始价值 100</span>
       </div>
     </div>
@@ -157,12 +176,28 @@
       <div class="read past"><span class="tag">已发生</span><span id="past-text"></span></div>
       <div class="read future"><span class="tag">下一段</span><span id="future-text"></span></div>
     </div>
+
+    <div class="ai-box">
+      <h3><span class="sp">✨</span>AI 人生推演</h3>
+      <p class="sub">基于你的轨迹提炼优势，结合你的目标做一段正向推演。不是算命，是规划引导。</p>
+      <div class="ai-row">
+        <button id="aiBtn">✨ 开始推演</button>
+        <select id="modelSel" title="选择模型"><option>加载模型中…</option></select>
+      </div>
+      <div class="ai-out" id="aiOut">
+        <div class="ai-str" id="aiStr"></div>
+        <div class="ai-ms" id="aiMs"></div>
+        <div class="ai-guide" id="aiGuide"></div>
+        <p class="ai-note">以上为基于你填写的人生轨迹与目标的引导性推演，不是命运预测 · 调用本机 WorkBuddy 云服务额度 · 数据仅用于本次生成</p>
+      </div>
+    </div>
+
     <button id="saveBtn">📈 保存人生K线长图</button>
   </section>
 </main>
 
 <footer class="foot">
-  全部在本机浏览器完成 · 断网也能用 · 不登录、不上传、不用任何额度<br>
+  本地引擎：全部在本机浏览器完成，断网也能用 · AI 推演：走 WorkBuddy 云服务，免密钥，默认免费模型<br>
   只记录与复盘已发生的事，未来段由你自己填写计划，不预测运势 · 使用 WorkBuddy 制作 · 1024 程序员节造物挑战参赛作品
 </footer>
 
@@ -179,7 +214,14 @@
   var SANS='-apple-system,"PingFang SC","Microsoft YaHei",sans-serif';
   var MONO='ui-monospace,Menlo,Consolas,monospace';
 
-  /* ── 共性事件菜单：组 → [文案, 岁数, 涨跌] ── */
+  /* ── 云服务配置（激活时由平台返回，仅限本 app 使用） ── */
+  var PUBLIC_CONFIG={
+    endpoint:'https://meme-foundry.app.workbuddy.host',
+    oauthRelayBaseUrl:'https://www.workbuddy.cn/v2/as/genie-baas/oauth',
+    publishableKey:'wbpk_a2FjeCwCGyg5feQCvc81Jj_c0WC6LgWyJdY9PjAQoHkMWvf244HLRNs'
+  };
+
+  /* ── 共性事件菜单 ── */
   var COMMON=[
     ['成长',[
       ['上幼儿园',3,1],['上小学',6,1],['戴上眼镜',10,-1],['中考',15,1],['高考',18,1],['考上大学',18,1],
@@ -197,7 +239,7 @@
     ]]
   ];
 
-  /* ── 情绪词库：词 → 权重 ── */
+  /* ── 情绪词库 ── */
   var WORDS=[
     ['去世',-26],['离世',-26],['意外',-22],['车祸',-22],['确诊',-18],['大病',-18],['住院',-14],['重病',-18],
     ['失业',-22],['被裁',-22],['裁员',-22],['破产',-20],['负债',-16],['被骗',-16],['离婚',-20],['分手',-13],
@@ -211,12 +253,12 @@
     ['第一次',7],['被认可',10],['自由',8],['副业',9],['副业变现',12],['健身',8],['养生',6],['回老家',7],['双百',10]
   ];
 
-  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){toastEl.classList.remove('on');},1600); }
+  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){toastEl.classList.remove('on');},1800); }
   function birthYear(){ var v=parseInt(birthEl.value,10); if(isNaN(v)) v=1990; return Math.min(2015,Math.max(1940,v)); }
   function weightOf(t){ var w=0,hit=false; for(var i=0;i<WORDS.length;i++){ if(t.indexOf(WORDS[i][0])>=0){ w+=WORDS[i][1]; hit=true; } } return hit?w:null; }
 
   /* ── 共性事件点选 UI ── */
-  var commonState={}; // key -> {y,t,dir}
+  var commonState={};
   COMMON.forEach(function(g){
     var box=document.createElement('div'); box.className='grp';
     var gt=document.createElement('div'); gt.className='gt'; gt.textContent=g[0];
@@ -240,7 +282,6 @@
     groupsEl.appendChild(box);
   });
   birthEl.addEventListener('input',function(){
-    // 出生年变化 → 共性事件年份重算
     Object.keys(commonState).forEach(function(k){
       var parts=k.split('|'), grp=parts[0], name=parts[1];
       COMMON.forEach(function(g){ if(g[0]===grp) g[1].forEach(function(it){ if(it[0]===name) commonState[k].y=birthYear()+it[1]; }); });
@@ -296,22 +337,44 @@
     return list;
   }
 
-  /* ── K线序列：过去实线 + 未来虚线 ── */
-  function buildSeries(list){
+  /* ── K线序列：过去实线 + 未来（用户计划 或 AI 推演里程碑） ── */
+  function buildSeries(list, aiMilestones){
     var years={};
-    list.forEach(function(e){ (years[e.y]=years[e.y]||{open:0,pos:0,neg:0,events:[]}); years[e.y].events.push(e); });
+    list.forEach(function(e){
+      if(e.future) return;
+      (years[e.y]=years[e.y]||{open:0,pos:0,neg:0,events:[]}); years[e.y].events.push(e);
+    });
     var ys=Object.keys(years).map(Number).sort(function(a,b){return a-b;});
     var v=100, series=[], firstFutureYear=null;
     ys.forEach(function(y){
-      var g=years[y];
-      var isFuture=g.events.some(function(e){return e.future;});
-      if(isFuture&&firstFutureYear===null) firstFutureYear=y;
-      var open=v, pos=0, neg=0;
+      var g=years[y], open=v, pos=0, neg=0;
       g.events.forEach(function(e){ if(e.w>=0) pos+=e.w; else neg+=e.w; });
       var close=open+pos+neg;
-      series.push({y:y,open:open,close:close,high:Math.max(open,open+pos),low:Math.min(close,open+neg),events:g.events,future:isFuture});
+      series.push({y:y,open:open,close:close,high:Math.max(open,open+pos),low:Math.min(close,open+neg),events:g.events});
       v=close;
     });
+    var pastEnd=series.length?series[series.length-1].close:100;
+    // 未来段
+    if(aiMilestones&&aiMilestones.length){
+      aiMilestones.forEach(function(m){
+        var my=parseInt(m.year,10); if(!my||my<1940||my>2100) return;
+        var mv=parseFloat(m.value); if(!isFinite(mv)) return;
+        var open=v, close=mv;
+        var d=Math.max(2,Math.abs(close-open)*0.3);
+        series.push({y:my,open:open,close:close,high:Math.max(open,close)+d,low:Math.min(open,close)-d,
+          events:[{t:m.note||'里程碑'}],future:true,ai:true});
+        v=close;
+        if(firstFutureYear===null) firstFutureYear=my;
+      });
+    } else {
+      list.filter(function(e){return e.future;}).forEach(function(e){
+        if(firstFutureYear===null) firstFutureYear=e.y;
+        var open=v, pos=e.w>=0?e.w:0, neg=e.w<0?e.w:0;
+        var close=open+e.w;
+        series.push({y:e.y,open:open,close:close,high:Math.max(open,open+pos),low:Math.min(close,open+neg),events:[e],future:true});
+        v=close;
+      });
+    }
     return {series:series, firstFutureYear:firstFutureYear};
   }
 
@@ -335,7 +398,6 @@
     lo-=span*0.12; hi+=span*0.12;
     function X(y){ return padL+(y-minY)/(maxY-minY)*iw; }
     function Y(v){ return padT+(hi-v)/(hi-lo)*ih; }
-    // 网格
     c.strokeStyle=grid; c.lineWidth=1; c.fillStyle=sub; c.font='20px '+MONO; c.textAlign='right'; c.textBaseline='middle';
     for(var i=0;i<=4;i++){
       var v=lo+(hi-lo)*i/4, y=Y(v);
@@ -345,7 +407,6 @@
     c.textAlign='center'; c.textBaseline='top';
     var step=Math.max(1,Math.ceil((maxY-minY)/8));
     for(var y2=Math.ceil(minY/step)*step; y2<=maxY; y2+=step) c.fillText(y2+'',X(y2),H-padB+12);
-    // 今天分隔线（未来段起点）
     if(firstFutureYear!==null&&firstFutureYear>minY){
       var fx=X(firstFutureYear);
       c.strokeStyle='#B9A6E8'; c.lineWidth=2; c.setLineDash([6,6]);
@@ -354,7 +415,6 @@
       c.fillStyle='#B9A6E8'; c.font='18px '+SANS; c.textAlign='left'; c.textBaseline='bottom';
       c.fillText('← 已发生 ｜ 计划中 →', padL+6, padT-12);
     }
-    // 蜡烛
     var bw=Math.max(6,Math.min(34,iw/Math.max(8,(maxY-minY+1))*0.56));
     series.forEach(function(s){
       var x=X(s.y), up=s.close>=s.open;
@@ -363,7 +423,10 @@
       c.beginPath(); c.moveTo(x,Y(s.high)); c.lineTo(x,Y(s.low)); c.stroke();
       var yO=Y(s.open), yC=Y(s.close);
       var top=Math.min(yO,yC), h=Math.max(3,Math.abs(yC-yO));
-      if(s.future){
+      if(s.ai){
+        c.globalAlpha=0.9; c.fillStyle='#9B7DFF'; c.fillRect(x-bw/2,top,bw,h); c.globalAlpha=1;
+        c.setLineDash([4,3]); c.lineWidth=2.5; c.strokeRect(x-bw/2,top,bw,h); c.setLineDash([]);
+      } else if(s.future){
         c.globalAlpha=0.45; c.fillRect(x-bw/2,top,bw,h); c.globalAlpha=1;
         c.setLineDash([4,3]); c.lineWidth=2; c.strokeRect(x-bw/2,top,bw,h); c.setLineDash([]);
       } else {
@@ -371,7 +434,6 @@
         c.fillRect(x-bw/2,top,bw,h);
       }
     });
-    // 五年均线（只基于过去）
     var past=series.filter(function(s){return !s.future;});
     if(past.length>=2){
       c.strokeStyle='#E8B93B'; c.lineWidth=2.5; c.beginPath();
@@ -384,15 +446,14 @@
       });
       c.stroke();
     }
-    // 事件标注
     c.font='19px '+SANS; c.textBaseline='bottom';
     var idxs=[], stride=Math.max(1,Math.ceil(series.length/8));
     for(var i3=0;i3<series.length;i3+=stride) idxs.push(i3);
     idxs.forEach(function(i){
       var s=series[i];
-      var txt=s.events[0].t;
-      if(txt.length>7) txt=txt.slice(0,7)+'…';
-      c.fillStyle=s.future?'#B9A6E8':fg;
+      var txt=(s.ai?'✨ ':'')+s.events[0].t;
+      if(txt.length>8) txt=txt.slice(0,8)+'…';
+      c.fillStyle=s.ai?'#C9B6FF':(s.future?'#B9A6E8':fg);
       var ax=X(s.y), tx=ax, align='center';
       if(ax<padL+56){ align='left'; tx=padL; }
       else if(ax>W-padR-56){ align='right'; tx=W-padR; }
@@ -415,20 +476,22 @@
     series.forEach(function(s){ if(s.close-s.open<worst.close-worst.open) worst=s; if(s.close-s.open>best.close-best.open) best=s; });
     return '已发生 '+series.length+' 根年线、'+Math.round(series[series.length-1].y-series[0].y)+' 年，累计'+(total>=0?'涨':'跌')+Math.abs(total).toFixed(0)+'%，'+upN+' 根阳线。走势「'+shape+'」，'+tail+'。最低谷在 '+worst.y+'（'+worst.events[0].t.slice(0,12)+'），最高光在 '+best.y+'（'+best.events[0].t.slice(0,12)+'）。';
   }
-  function summarizeFuture(series){
+  function summarizeFuture(series,aiOn){
+    if(aiOn) return 'AI 已基于你的轨迹与目标完成推演，见下方「✨ AI 人生推演」。实线是已经发生的，紫色虚线是推演中你走向目标的路径——下一段K线，执笔的人是你。';
     var fut=series.filter(function(s){return s.future;});
-    if(!fut.length) return '还没填未来计划。左边 STEP 3 加一个——虚线画到哪里，你这段时间的剧情就写到哪里。';
+    if(!fut.length) return '还没填未来计划。左边 STEP 3 加一个——虚线画到哪里，你这段时间的剧情就写到哪里。想更准？填完点「✨ 开始推演」。';
     var next=fut[0];
     var gap=next.y-new Date().getFullYear();
     var when=gap<=0?'今年':gap===1?'明年':gap+' 年后';
-    return '接下来你计划了 '+fut.length+' 件大事，最近的一站是 '+when+'的《'+next.events[0].t.slice(0,14)+'》。实线是已经发生的，虚线是你准备画的——下一段K线的涨跌，执笔的人是你。';
+    return '接下来你计划了 '+fut.length+' 件大事，最近的一站是 '+when+'的《'+next.events[0].t.slice(0,14)+'》。实线是已经发生的，虚线是你准备画的——下一段K线的涨跌，执笔的人是你。点「✨ 开始推演」让 AI 帮你把这段路画细。';
   }
 
   /* ── 刷新 ── */
   var current={series:[],list:[],firstFutureYear:null};
   function refresh(){
     var list=allEvents();
-    var built=buildSeries(list);
+    var aiOn=AI.milestones.length>0;
+    var built=buildSeries(list, aiOn?AI.milestones:null);
     current={series:built.series, list:list, firstFutureYear:built.firstFutureYear};
     drawChart(ctx,chart.width,chart.height,built.series,built.firstFutureYear,true);
     var past=built.series.filter(function(s){return !s.future;});
@@ -439,13 +502,194 @@
     past.forEach(function(s){ peak=Math.max(peak,s.high); dd=Math.max(dd,peak-s.low); });
     document.getElementById('s-dd').textContent=past.length?(dd/Math.max(1,peak)*100).toFixed(0)+'%':'–';
     pastText.textContent=summarizePast(past);
-    futureText.textContent=summarizeFuture(built.series);
+    futureText.textContent=summarizeFuture(built.series,aiOn);
   }
+
+  /* ═══════════ AI 推演（WorkBuddy 云服务 · 免密钥） ═══════════ */
+  var AI={cloud:null, models:[], model:null, busy:false, lastCall:0, milestones:[], strengths:[], guidance:'', sdkLoading:false};
+  var aiBtn=document.getElementById('aiBtn'), modelSel=document.getElementById('modelSel');
+  var aiOut=document.getElementById('aiOut'), aiStr=document.getElementById('aiStr'), aiMs=document.getElementById('aiMs'), aiGuide=document.getElementById('aiGuide');
+
+  function loadSDK(){
+    if(AI.cloud) return Promise.resolve(AI.cloud);
+    if(AI.sdkLoading) return AI.sdkLoading;
+    AI.sdkLoading=new Promise(function(resolve,reject){
+      var done=false;
+      var timer=setTimeout(function(){ if(!done){ done=true; reject(new Error('AI 组件加载超时')); } },12000);
+      var s=document.createElement('script');
+      s.src='https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js';
+      s.onload=function(){
+        if(done) return; done=true; clearTimeout(timer);
+        try{
+          AI.cloud=WorkBuddyCloud.createWorkBuddyCloud({
+            endpoint:PUBLIC_CONFIG.endpoint,
+            oauthRelayBaseUrl:PUBLIC_CONFIG.oauthRelayBaseUrl,
+            publishableKey:PUBLIC_CONFIG.publishableKey
+          });
+          resolve(AI.cloud);
+        }catch(e){ reject(e); }
+      };
+      s.onerror=function(){ if(done) return; done=true; clearTimeout(timer); reject(new Error('SDK 加载失败（网络问题）')); };
+      document.head.appendChild(s);
+    });
+    return AI.sdkLoading;
+  }
+
+  function fillModels(){
+    modelSel.innerHTML='';
+    AI.models.forEach(function(m){
+      var o=document.createElement('option');
+      o.value=m.id;
+      var free=/x0\.00/.test(String(m.credits||''));
+      o.textContent=(m.name||m.id)+(free?' · 免费':(m.credits?(' · '+m.credits):''));
+      modelSel.appendChild(o);
+    });
+    if(AI.model) modelSel.value=AI.model.id;
+  }
+  function pickDefaultModel(){
+    // 默认优先免费模型：step-5-preview（快且免费）→ 任一 x0.00 → 首个可用
+    return AI.models.filter(function(m){return m.id==='step-5-preview';})[0]
+      || AI.models.filter(function(m){return /x0\.00/.test(String(m.credits||''));})[0]
+      || AI.models[0];
+  }
+  function ensureModels(){
+    return loadSDK().then(function(cloud){
+      return cloud.llm.models.list();
+    }).then(function(models){
+      AI.models=(models||[]).filter(function(m){ return m.disabled!==true; });
+      if(!AI.models.length) throw new Error('模型列表为空');
+      AI.model=pickDefaultModel();
+      fillModels();
+      return AI.models;
+    });
+  }
+  modelSel.onchange=function(){
+    var m=AI.models.filter(function(x){return x.id===modelSel.value;})[0];
+    if(m) AI.model=m;
+  };
+
+  function sanitize(t){ return String(t||'').replace(/[\x00-\x1f]/g,' ').slice(0,60); }
+  function buildPrompt(){
+    var past=current.series.filter(function(s){return !s.future;});
+    var plans=allEvents().filter(function(e){return e.future;});
+    var lines=past.map(function(s){
+      var evs=s.events.map(function(e){return e.t;}).join('、');
+      return s.y+'｜'+evs+'｜'+(s.close>=s.open?'涨':'跌');
+    }).join('\n');
+    var planLines=plans.length?plans.map(function(e){return e.y+'｜'+e.t;}).join('\n'):'（用户暂未填写具体计划）';
+    var total=past.length?((past[past.length-1].close-past[0].open)/past[0].open*100):0;
+    return '【过往大事年表】（年份｜事件｜当年涨跌）\n'+lines+
+      '\n\n【累计】'+(total>=0?'+':'')+total.toFixed(0)+'%\n\n【接下来的目标/计划】\n'+planLines+
+      '\n\n请严格按下面要求输出（只输出 JSON，不要任何其他文字）：\n'+
+      '{"strengths":["优势1（引用具体事件佐证）","优势2","优势3"],'+
+      '"milestones":[{"year":20XX,"value":数值,"note":"这件里程碑的含义，结合优势与目标"}],'+
+      '"guidance":"100字以内正面引导"}\n'+
+      '要求：\n'+
+      '1. milestones 给 3-5 个，年份从 '+(past.length?past[past.length-1].y+1:2027)+' 年起，覆盖到计划年份之后；value 必须逐级递增且整体高于 '+(past.length?past[past.length-1].close:100)+'（向上是必须的）；note 里要点明是靠哪个优势、走向哪个目标；\n'+
+      '2. 严禁出现运势、命理、注定、天命、八字、流年等词；这是人生规划引导，不是算命；\n'+
+      '3. guidance 要肯定他已走过的路，说清优势如何服务目标，给一个具体的下一步动作；\n'+
+      '4. 全部使用简体中文，语气像靠谱的人生教练，真诚具体不油腻。';
+  }
+  var SYSTEM_PROMPT='你是「人生K线」的复盘引导师，一位真诚、具体、不油腻的人生规划教练。'+
+    '你必须遵守：1. 这是人生规划引导，不是算命、不是命理、不是运势预测，严禁使用"运势/命理/注定/天命/八字/流年"等表述；'+
+    '2. 只基于用户提供的人生大事年表和目标计划分析，不编造用户未提供的信息；'+
+    '3. 必须正向：从过往轨迹提炼真实优势，推演必须整体向上，给出可执行的下一步；'+
+    '4. 语气像靠谱的老朋友，具体、有温度、不说空话。';
+
+  aiBtn.onclick=async function(){
+    if(AI.busy) return;
+    var now=Date.now();
+    if(now-AI.lastCall<5000){ toast('推演刚用完，缓几秒再来'); return; }
+    var past=current.series.filter(function(s){return !s.future;});
+    if(past.length<2){ toast('先点至少两件已发生的大事'); return; }
+    var plans=allEvents().filter(function(e){return e.future;});
+    if(!plans.length){ toast('先在 STEP 3 填一个目标，推演更准'); return; }
+    AI.busy=true; aiBtn.disabled=true; aiBtn.textContent='⏳ 推演中…';
+    var guard=setTimeout(function(){ toast('推演超时（可换轻量模型重试）'); AI.busy=false; aiBtn.disabled=false; aiBtn.textContent='✨ 开始推演'; },100000);
+    try{
+      if(!AI.models.length) await ensureModels();
+      var answer='';
+      var stream=await AI.cloud.llm.chat.completions.create({
+        model:AI.model.id,
+        messages:[{role:'system',content:SYSTEM_PROMPT},{role:'user',content:buildPrompt()}],
+        stream:true,
+        response_format:{type:'json_object'},
+        temperature:0.8
+      });
+      for await (var chunk of stream){
+        var delta=chunk.choices&&chunk.choices[0]&&chunk.choices[0].delta;
+        if(delta&&delta.content) answer+=delta.content;
+      }
+      var res=parseJSON(answer);
+      if(!res) throw new Error('返回格式异常');
+      clearTimeout(guard);
+      applyAI(res);
+    }catch(e){ clearTimeout(guard); showAIError(e); }
+  };
+  function parseJSON(text){
+    try{ return JSON.parse(text); }catch(e){}
+    var m=String(text).match(/\{[\s\S]*\}/);
+    if(m){ try{ return JSON.parse(m[0]); }catch(e){} }
+    return null;
+  }
+
+  function showAIError(e){
+    AI.busy=false; aiBtn.disabled=false; aiBtn.textContent='✨ 开始推演';
+    var msg=(e&&e.message)||'推演失败';
+    if(e&&e.error&&e.error.code){
+      var code=e.error.code;
+      if(code.indexOf('auth_')===0) msg='AI 推演需要在 WorkBuddy 链接里打开（当前打开方式不受支持）';
+      else if(code.indexOf('quota_')===0) msg='额度暂时用完了，稍后再试';
+      else if(code.indexOf('gateway_')===0||code.indexOf('model_')===0) msg='模型服务繁忙，稍后再试';
+    }
+    toast(msg);
+  }
+  function applyAI(res){
+    AI.lastCall=Date.now();
+    AI.busy=false; aiBtn.disabled=false; aiBtn.textContent='🔁 重新推演';
+    AI.milestones=(res.milestones||[]).map(function(m){
+      return {year:parseInt(m.year,10), value:parseFloat(m.value), note:String(m.note||'')};
+    }).filter(function(m){ return m.year&&isFinite(m.value); });
+    AI.strengths=(res.strengths||[]).map(String);
+    AI.guidance=String(res.guidance||'');
+    aiStr.innerHTML='';
+    AI.strengths.forEach(function(s){
+      var b=document.createElement('span'); b.className='s'; b.textContent='💪 '+s;
+      aiStr.appendChild(b);
+    });
+    aiMs.innerHTML='';
+    AI.milestones.forEach(function(m){
+      var d=document.createElement('div');
+      d.innerHTML='<b>'+m.year+'</b> · 推演价值 '+m.value+' — '+String(m.note||'').replace(/[<>&]/g,'');
+      aiMs.appendChild(d);
+    });
+    aiGuide.textContent=AI.guidance;
+    aiOut.classList.add('on');
+    refresh();
+    toast('推演完成，K线已更新');
+  }
+
+  /* ── 初始示例 ── */
+  ['感情|初恋','感情|分手','感情|结婚','学业事业|毕业','学业事业|第一份工作','学业事业|涨薪','成长|买房','成长|搬家'].forEach(function(k){
+    var parts=k.split('|');
+    COMMON.forEach(function(g){ if(g[0]===parts[0]) g[1].forEach(function(it){ if(it[0]===parts[1]){ var w=weightOf(it[0]); commonState[k]={y:1990+it[1],t:it[0],dir:it[2],w:w===null?it[2]*4:w}; } }); });
+  });
+  groupsEl.querySelectorAll('.grp').forEach(function(box){
+    var gt=box.querySelector('.gt').textContent;
+    box.querySelectorAll('.chip').forEach(function(chip){
+      var name=chip.textContent.replace(/\d+岁$/,'');
+      if(commonState[gt+'|'+name]) chip.classList.add('on');
+    });
+  });
+  addRow(2021,'被裁员，躺了半年',-1,false);
+  addRow(2028,'换一座城市，做想做的事',1,true);
+  refresh();
 
   /* ── 导出长图 ── */
   document.getElementById('saveBtn').onclick=function(){
     if(!current.series.length){ toast('先点几件大事再保存'); return; }
-    var W=1080,H=1560;
+    var aiOn=AI.milestones.length>0;
+    var W=1080, H=aiOn?1760:1560;
     var pc=document.createElement('canvas'); pc.width=W; pc.height=H;
     var c=pc.getContext('2d');
     c.fillStyle='#F4F1E8'; c.fillRect(0,0,W,H);
@@ -478,12 +722,26 @@
     c.fillText('已发生', 64, 1168);
     c.font='24px '+SANS; c.fillStyle='#2A2A32';
     wrapText(c, pastText.textContent, 64, 1210, W-128, 40, 3);
-    c.fillStyle='#5B3FC4'; c.font='700 22px '+SANS;
-    c.fillText('下一段 · 由你执笔', 64, 1352);
-    c.font='24px '+SANS; c.fillStyle='#2A2A32';
-    wrapText(c, futureText.textContent, 64, 1394, W-128, 40, 3);
-    c.fillStyle='#9B9BA5'; c.font='19px '+MONO;
-    c.fillText('只记录已发生的事，不预测运势 · 本机生成 · 使用 WorkBuddy 制作', 64, 1516);
+    if(aiOn){
+      c.fillStyle='#5B3FC4'; c.font='700 22px '+SANS;
+      c.fillText('✨ AI 人生推演 · 下一段由你执笔', 64, 1352);
+      c.font='23px '+SANS; c.fillStyle='#2A2A32';
+      var strengths='优势：'+AI.strengths.join('；');
+      wrapText(c, strengths, 64, 1394, W-128, 38, 2);
+      wrapText(c, AI.guidance, 64, 1482, W-128, 38, 3);
+      c.fillStyle='#9B9BA5'; c.font='18px '+MONO;
+      c.fillText('引导性推演，不是命运预测 · 基于你填写的内容生成本机处理', 64, 1600);
+      c.fillStyle='#9B9BA5'; c.font='19px '+MONO;
+      c.fillText('只记录已发生的事，不预测运势 · 使用 WorkBuddy 制作', 64, 1660);
+      c.fillText('人生K线 · '+birthYear()+' 年生', 64, 1706);
+    } else {
+      c.fillStyle='#5B3FC4'; c.font='700 22px '+SANS;
+      c.fillText('下一段 · 由你执笔', 64, 1352);
+      c.font='24px '+SANS; c.fillStyle='#2A2A32';
+      wrapText(c, futureText.textContent, 64, 1394, W-128, 40, 3);
+      c.fillStyle='#9B9BA5'; c.font='19px '+MONO;
+      c.fillText('只记录已发生的事，不预测运势 · 本机生成 · 使用 WorkBuddy 制作', 64, 1516);
+    }
     try{
       pc.toBlob(function(blob){
         if(!blob){ toast('导出失败，请重试'); return; }
@@ -505,22 +763,6 @@
     if(line) lines.push(line);
     lines.slice(0,maxLines).forEach(function(l,k){ c.fillText(l,x,y+k*lh); });
   }
-
-  /* ── 初始示例：点选几件 + 一条自选 + 一条计划 ── */
-  ['感情|初恋','感情|分手','感情|结婚','学业事业|毕业','学业事业|第一份工作','学业事业|涨薪','成长|买房','成长|搬家'].forEach(function(k){
-    var parts=k.split('|');
-    COMMON.forEach(function(g){ if(g[0]===parts[0]) g[1].forEach(function(it){ if(it[0]===parts[1]){ var w=weightOf(it[0]); commonState[k]={y:1990+it[1],t:it[0],dir:it[2],w:w===null?it[2]*4:w}; } }); });
-  });
-  groupsEl.querySelectorAll('.grp').forEach(function(box){
-    var gt=box.querySelector('.gt').textContent;
-    box.querySelectorAll('.chip').forEach(function(chip){
-      var name=chip.textContent.replace(/\d+岁$/,'');
-      if(commonState[gt+'|'+name]) chip.classList.add('on');
-    });
-  });
-  addRow(2021,'被裁员，躺了半年',-1,false);
-  addRow(2028,'换一座城市，做想做的事',1,true);
-  refresh();
 })();
 </script>
 </body>
