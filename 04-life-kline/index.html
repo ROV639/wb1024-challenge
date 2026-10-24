@@ -16,7 +16,7 @@
   body{min-height:100dvh;padding-bottom:36px}
 
   .top{border-bottom:3px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:20}
-  .top-in{max-width:1080px;margin:0 auto;padding:11px 16px;display:flex;align-items:center;gap:12px}
+  .top-in{max-width:1180px;margin:0 auto;padding:11px 16px;display:flex;align-items:center;gap:12px}
   .logo{width:36px;height:36px;border:2.5px solid var(--ink);border-radius:10px;background:var(--up);
     display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;font-family:var(--mono);
     box-shadow:3px 3px 0 var(--ink);flex-shrink:0}
@@ -25,49 +25,70 @@
   .stamp{margin-left:auto;font-family:var(--mono);font-size:10.5px;font-weight:700;color:#fff;background:var(--red);
     border:2px solid var(--ink);border-radius:6px;padding:3px 9px;transform:rotate(3deg);box-shadow:2px 2px 0 var(--ink);white-space:nowrap}
 
-  .wrap{max-width:1080px;margin:0 auto;padding:18px 16px;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:18px;align-items:start}
-  @media (max-width:880px){ .wrap{grid-template-columns:1fr} }
+  .wrap{max-width:1180px;margin:0 auto;padding:18px 16px;display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:18px;align-items:start}
+  @media (max-width:920px){ .wrap{grid-template-columns:1fr} }
 
-  .blk{background:var(--card);border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:14px 15px}
-  .blk h3{font-size:14px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .blk{background:var(--card);border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:14px 15px;margin-bottom:14px}
+  .blk h3{font-size:14px;display:flex;align-items:center;gap:8px;margin-bottom:3px}
   .blk h3 i{font-style:normal;font-family:var(--mono);font-size:10px;background:var(--ink);color:var(--paper);border-radius:4px;padding:2px 6px;letter-spacing:.05em}
   .blk .sub{font-size:11.5px;color:var(--ink2);margin-bottom:10px}
 
-  /* ── 记事行 ── */
-  #rows{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow-y:auto;padding-right:2px}
-  .row{display:flex;align-items:center;gap:7px}
+  /* 出生年 */
+  .birth{display:flex;align-items:center;gap:10px}
+  .birth label{font-size:13px;color:var(--ink2);white-space:nowrap}
+  #birth{width:96px;border:2.5px solid var(--ink);border-radius:10px;padding:9px 10px;font-size:16px;font-family:var(--mono);
+    text-align:center;background:#fff;outline:none}
+  #birth:focus{border-color:var(--hazard-d);box-shadow:0 0 0 4px rgba(255,184,0,.3)}
+  .birth .hint{font-size:11px;color:var(--ink2)}
+
+  /* 共性事件点选 */
+  .grp{margin-bottom:9px}
+  .grp .gt{font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:6px;letter-spacing:.02em}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:1.5px solid var(--ink);background:#fff;border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:transform .1s}
+  .chip small{font-family:var(--mono);color:var(--ink2);margin-left:4px;font-size:10px}
+  .chip:active{transform:scale(.94)}
+  .chip.on{background:var(--ink);color:var(--paper)}
+  .chip.on small{color:#B9BDC7}
+
+  /* 自选大事 */
+  .row{display:flex;align-items:center;gap:7px;margin-bottom:8px}
   .row input{border:2px solid var(--ink);border-radius:9px;padding:8px 9px;font-size:14px;font-family:var(--sans);background:#fff;outline:none;min-width:0}
-  .row input.yr{width:66px;text-align:center;font-family:var(--mono)}
+  .row input.yr{width:64px;text-align:center;font-family:var(--mono)}
   .row input.ev{flex:1}
   .row input:focus{border-color:var(--hazard-d);box-shadow:0 0 0 3px rgba(255,184,0,.3)}
-  .row .dir{width:34px;height:34px;border:2px solid var(--ink);border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;
+  .row .dir{width:32px;height:32px;border:2px solid var(--ink);border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;
     display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--sans)}
   .row .dir.up{background:#FCE8E6;color:var(--up)}
   .row .dir.down{background:#E3F4E9;color:var(--down)}
-  .row .del{width:30px;height:30px;border:2px solid var(--ink);border-radius:8px;background:#fff;cursor:pointer;font-size:13px;flex-shrink:0;font-family:var(--sans)}
+  .row .del{width:29px;height:29px;border:2px solid var(--ink);border-radius:8px;background:#fff;cursor:pointer;font-size:12px;flex-shrink:0;font-family:var(--sans)}
   .row .del:active{transform:scale(.92)}
-  #addBtn{margin-top:10px;width:100%;border:2px dashed var(--ink);background:#fff;border-radius:10px;padding:9px;font-size:13.5px;
+  #addBtn{width:100%;border:2px dashed var(--ink);background:#fff;border-radius:10px;padding:8px;font-size:13px;
     cursor:pointer;font-family:var(--sans);font-weight:600}
   #addBtn:active{background:#FFF6DF}
+  .row.plan input.ev{border-style:dashed}
+  .row.plan .dir{background:#EFEAFB;color:#5B3FC4}
 
-  /* ── 图表区 ── */
+  /* 图表区 */
   .chartbox{background:#10141C;border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:12px}
   #chart{width:100%;height:auto;display:block;border-radius:8px}
-  .legend{display:flex;gap:14px;align-items:center;margin-top:10px;font-family:var(--mono);font-size:10.5px;color:#8B93A3;flex-wrap:wrap}
+  .legend{display:flex;gap:12px;align-items:center;margin-top:10px;font-family:var(--mono);font-size:10.5px;color:#8B93A3;flex-wrap:wrap}
   .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  .legend .dash{display:inline-block;width:16px;height:0;border-top:2.5px dashed #8B93A3;margin-right:5px;vertical-align:2px}
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
   .st{background:var(--card);border:2px solid var(--ink);border-radius:11px;padding:9px 6px;text-align:center}
   .st b{display:block;font-size:17px;font-weight:800;font-family:var(--mono)}
   .st span{font-size:10.5px;color:var(--ink2)}
-  #summary{margin-top:12px;background:var(--card);border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);
-    padding:13px 15px;font-size:14.5px;line-height:1.75}
-  #summary .tag{display:inline-block;font-family:var(--mono);font-size:10px;background:var(--ink);color:var(--paper);
-    border-radius:4px;padding:2px 7px;margin-right:8px;letter-spacing:.05em}
+  .reads{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+  .read{background:var(--card);border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:13px 15px;font-size:14px;line-height:1.75}
+  .read .tag{display:inline-block;font-family:var(--mono);font-size:10px;border-radius:4px;padding:2px 7px;margin-right:8px;letter-spacing:.05em;color:#fff}
+  .read.past .tag{background:var(--ink)}
+  .read.future .tag{background:#5B3FC4}
   #saveBtn{margin-top:12px;width:100%;border:2.5px solid var(--ink);border-radius:13px;background:var(--hazard);
     font-size:17px;font-weight:800;padding:15px 8px;cursor:pointer;font-family:var(--sans);box-shadow:4px 4px 0 var(--ink)}
   #saveBtn:active{transform:translate(3px,3px);box-shadow:none}
 
-  .foot{max-width:1080px;margin:24px auto 0;padding:0 16px;font-family:var(--mono);font-size:10.5px;color:var(--ink2);text-align:center;line-height:1.7}
+  .foot{max-width:1180px;margin:24px auto 0;padding:0 16px;font-family:var(--mono);font-size:10.5px;color:var(--ink2);text-align:center;line-height:1.7}
   .toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(16px);background:var(--ink);color:var(--paper);
     padding:10px 20px;border-radius:999px;font-size:13.5px;opacity:0;transition:.25s;pointer-events:none;z-index:99;max-width:86vw;text-align:center}
   .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -84,20 +105,45 @@
 </header>
 
 <main class="wrap">
-  <section class="blk">
-    <h3><i>STEP 1</i>记下你的大事</h3>
-    <p class="sub">一行一件：年份 + 发生了什么。涨跌自动判，点色块可手动改。</p>
-    <div id="rows"></div>
-    <button id="addBtn">＋ 再加一件</button>
+  <section>
+    <div class="blk">
+      <h3><i>STEP 0</i>你哪年出生</h3>
+      <div class="birth">
+        <label>出生年</label>
+        <input id="birth" type="number" value="1990" min="1940" max="2015">
+        <span class="hint">点选的大事按年龄自动排年</span>
+      </div>
+    </div>
+
+    <div class="blk">
+      <h3><i>STEP 1</i>点选共性大事</h3>
+      <p class="sub">大部分人都会遇到的事，点一下加一条，年份自动算。再点一次取消。</p>
+      <div id="groups"></div>
+    </div>
+
+    <div class="blk">
+      <h3><i>STEP 2</i>自选大事</h3>
+      <p class="sub">年份 + 发生了什么。涨跌自动判，点色块可手动改。</p>
+      <div id="rows"></div>
+      <button id="addBtn">＋ 再加一件</button>
+    </div>
+
+    <div class="blk">
+      <h3><i>STEP 3</i>未来计划<span style="margin-left:auto;font-size:11px;color:var(--ink2);font-weight:400">画成虚线，由你执笔</span></h3>
+      <p class="sub">不是预测运势，是你打算干的事。</p>
+      <div id="plans"></div>
+      <button id="addPlanBtn">＋ 加一个计划</button>
+    </div>
   </section>
 
   <section>
     <div class="chartbox">
-      <canvas id="chart" width="880" height="560" aria-label="人生K线图"></canvas>
+      <canvas id="chart" width="900" height="560" aria-label="人生K线图"></canvas>
       <div class="legend">
         <span><i style="background:var(--up)"></i>阳线 · 高点</span>
         <span><i style="background:var(--down)"></i>阴线 · 低点</span>
         <span><i style="background:#E8B93B"></i>五年均线</span>
+        <span class="dash" style="border-color:#B9A6E8"></span>虚线 · 未来计划
         <span style="margin-left:auto">起始价值 100</span>
       </div>
     </div>
@@ -107,14 +153,17 @@
       <div class="st"><b id="s-down" style="color:var(--down)">–</b><span>阴线年数</span></div>
       <div class="st"><b id="s-dd">–</b><span>最大回撤</span></div>
     </div>
-    <div id="summary"><span class="tag">人生解读</span><span id="sum-text"></span></div>
+    <div class="reads">
+      <div class="read past"><span class="tag">已发生</span><span id="past-text"></span></div>
+      <div class="read future"><span class="tag">下一段</span><span id="future-text"></span></div>
+    </div>
     <button id="saveBtn">📈 保存人生K线长图</button>
   </section>
 </main>
 
 <footer class="foot">
-  全部在本机浏览器完成 · 涨跌由文案情绪自动判定，可手动改 · 不联网、不上传、不用任何额度<br>
-  只记录与复盘已发生的事，不预测未来运势 · 使用 WorkBuddy 制作 · 1024 程序员节造物挑战参赛作品
+  全部在本机浏览器完成 · 断网也能用 · 不登录、不上传、不用任何额度<br>
+  只记录与复盘已发生的事，未来段由你自己填写计划，不预测运势 · 使用 WorkBuddy 制作 · 1024 程序员节造物挑战参赛作品
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -122,90 +171,161 @@
 <script>
 (function(){
   "use strict";
-  var rowsEl=document.getElementById('rows'), addBtn=document.getElementById('addBtn');
+  var birthEl=document.getElementById('birth');
+  var groupsEl=document.getElementById('groups'), rowsEl=document.getElementById('rows'), plansEl=document.getElementById('plans');
   var chart=document.getElementById('chart'), ctx=chart.getContext('2d');
-  var sumText=document.getElementById('sum-text');
+  var pastText=document.getElementById('past-text'), futureText=document.getElementById('future-text');
   var toastEl=document.getElementById('toast'), toastTimer=null;
-  var DEMO=[['1990','出生，普普通通的一个娃'],['1997','上学，天天挨批'],['2005','考上大学，全家摆了酒'],['2009','毕业，第一份工作'],['2012','分手，瘦了十斤'],['2015','升职加薪，第一次带团队'],['2018','买房，背上三十年贷款'],['2021','被裁员，躺了半年'],['2023','重新上岸，换了城市'],['2026','还在路上']];
+  var SANS='-apple-system,"PingFang SC","Microsoft YaHei",sans-serif';
+  var MONO='ui-monospace,Menlo,Consolas,monospace';
+
+  /* ── 共性事件菜单：组 → [文案, 岁数, 涨跌] ── */
+  var COMMON=[
+    ['成长',[
+      ['上幼儿园',3,1],['上小学',6,1],['戴上眼镜',10,-1],['中考',15,1],['高考',18,1],['考上大学',18,1],
+      ['第一次一个人过年',23,1],['搬家',25,1],['买房',28,1],['开始养生',38,1]
+    ]],
+    ['感情',[
+      ['初恋',16,1],['表白成功',16,1],['分手',18,-1],['异地恋',20,-1],['和好',21,1],['结婚',28,1],['有了孩子',30,1]
+    ]],
+    ['学业事业',[
+      ['毕业',22,1],['第一份工作',22,1],['实习',20,1],['跳槽',27,1],['涨薪',26,1],['第一次带团队',29,1],
+      ['被裁员',35,-1],['重新上岸',36,1],['开始副业',32,1]
+    ]],
+    ['生活',[
+      ['第一次坐飞机',20,1],['养了第一只猫',24,1],['体检报告出问题',35,-1],['规律健身',30,1],['带父母旅行',35,1],['回老家发展',36,1]
+    ]]
+  ];
 
   /* ── 情绪词库：词 → 权重 ── */
   var WORDS=[
     ['去世',-26],['离世',-26],['意外',-22],['车祸',-22],['确诊',-18],['大病',-18],['住院',-14],['重病',-18],
     ['失业',-22],['被裁',-22],['裁员',-22],['破产',-20],['负债',-16],['被骗',-16],['离婚',-20],['分手',-13],
     ['挂科',-9],['落榜',-14],['失利',-12],['失败',-12],['被拒',-9],['退学',-16],['延毕',-11],['重修',-8],
-    ['抑郁',-16],['emo',-10],['崩溃',-12],['摆烂',-7],['抑郁',-16],['失去',-12],['错过',-8],['吵架',-6],
-    ['生病',-10],['赔',-12],['黄了',-10],['吹了',-10],['延期',-7],['下降',-8],['低谷',-10],
+    ['抑郁',-16],['崩溃',-12],['摆烂',-7],['失去',-12],['错过',-8],['吵架',-6],['戴眼镜',-6],
+    ['生病',-10],['赔',-12],['黄了',-10],['吹了',-10],['延期',-7],['下降',-8],['低谷',-10],['异地',-8],
     ['出生',9],['考上',16],['录取',16],['上岸',15],['offer',13],['入职',10],['毕业',7],['结婚',15],
-    ['生娃',11],['怀孕',11],['买房',12],['落户',9],['升职',15],['加薪',12],['第一份工作',10],['夺冠',14],
-    ['获奖',12],['中标',10],['过',5],['赢',12],['发财',15],['中签',10],['表白成功',11],['在一起',10],
+    ['生娃',11],['怀孕',11],['买房',12],['落户',9],['升职',15],['加薪',12],['涨薪',12],['第一份工作',10],
+    ['夺冠',14],['获奖',12],['中标',10],['赢',12],['发财',15],['中签',10],['表白成功',11],['在一起',10],
     ['和好',9],['康复',12],['出院',11],['旅行',6],['搬家',5],['重启',9],['换了城市',8],['还在路上',6],
-    ['第一次',7],['冠军',14],['夸',6],['被认可',10],['自由',8],['瘦',5]
+    ['第一次',7],['被认可',10],['自由',8],['副业',9],['副业变现',12],['健身',8],['养生',6],['回老家',7],['双百',10]
   ];
 
   function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){toastEl.classList.remove('on');},1600); }
+  function birthYear(){ var v=parseInt(birthEl.value,10); if(isNaN(v)) v=1990; return Math.min(2015,Math.max(1940,v)); }
+  function weightOf(t){ var w=0,hit=false; for(var i=0;i<WORDS.length;i++){ if(t.indexOf(WORDS[i][0])>=0){ w+=WORDS[i][1]; hit=true; } } return hit?w:null; }
 
-  /* ── 事件行 UI ── */
-  var events=[];
-  function addRow(y,t,dir){
-    var row=document.createElement('div'); row.className='row';
-    var yr=document.createElement('input'); yr.className='yr'; yr.type='number'; yr.placeholder='年份'; yr.value=y||'';
-    yr.min=1900; yr.max=2100;
-    var ev=document.createElement('input'); ev.className='ev'; ev.type='text'; ev.placeholder='发生了什么…'; ev.value=t||''; ev.maxLength=40;
+  /* ── 共性事件点选 UI ── */
+  var commonState={}; // key -> {y,t,dir}
+  COMMON.forEach(function(g){
+    var box=document.createElement('div'); box.className='grp';
+    var gt=document.createElement('div'); gt.className='gt'; gt.textContent=g[0];
+    var chips=document.createElement('div'); chips.className='chips';
+    g[1].forEach(function(it){
+      var key=g[0]+'|'+it[0];
+      var b=document.createElement('button'); b.className='chip';
+      b.innerHTML=it[0]+'<small>'+it[1]+'岁</small>';
+      b.onclick=function(){
+        if(commonState[key]){ delete commonState[key]; b.classList.remove('on'); }
+        else {
+          var w=weightOf(it[0]);
+          commonState[key]={y:birthYear()+it[1], t:it[0], dir:it[2], w:w===null?it[2]*4:w};
+          b.classList.add('on');
+        }
+        refresh();
+      };
+      chips.appendChild(b);
+    });
+    box.appendChild(gt); box.appendChild(chips);
+    groupsEl.appendChild(box);
+  });
+  birthEl.addEventListener('input',function(){
+    // 出生年变化 → 共性事件年份重算
+    Object.keys(commonState).forEach(function(k){
+      var parts=k.split('|'), grp=parts[0], name=parts[1];
+      COMMON.forEach(function(g){ if(g[0]===grp) g[1].forEach(function(it){ if(it[0]===name) commonState[k].y=birthYear()+it[1]; }); });
+    });
+    refresh();
+  });
+
+  /* ── 自选大事行 ── */
+  function addRow(y,t,dir,plan){
+    var host=plan?plansEl:rowsEl;
+    var row=document.createElement('div'); row.className='row'+(plan?' plan':'');
+    var yr=document.createElement('input'); yr.className='yr'; yr.type='number'; yr.placeholder='年份'; yr.value=y||''; yr.min=1940; yr.max=2100;
+    var ev=document.createElement('input'); ev.className='ev'; ev.type='text'; ev.placeholder=plan?'计划做什么…':'发生了什么…'; ev.value=t||''; ev.maxLength=40;
     var d=document.createElement('button'); d.className='dir '+(dir>0?'up':'down'); d.textContent=dir>0?'涨':'跌'; d.title='点我切换涨跌';
-    var del=document.createElement('button'); del.className='del'; del.textContent='✕'; del.title='删掉这件';
-    d.onclick=function(){ d.className='dir '+(dir>0?'down':'up'); d.textContent=dir>0?'跌':'涨'; dir=-dir; refresh(); };
+    var del=document.createElement('button'); del.className='del'; del.textContent='✕';
+    d.onclick=function(){ dir=-dir; d.className='dir '+(dir>0?'up':'down'); d.textContent=dir>0?'涨':'跌'; refresh(); };
     del.onclick=function(){ row.remove(); refresh(); };
     yr.oninput=refresh; ev.oninput=refresh;
     row.appendChild(yr); row.appendChild(ev); row.appendChild(d); row.appendChild(del);
-    rowsEl.appendChild(row);
+    host.appendChild(row);
     return row;
   }
-  function readEvents(){
+  document.getElementById('addBtn').onclick=function(){
+    var last=rowsEl.lastElementChild;
+    var lastY=last?parseInt(last.querySelector('.yr').value,10):NaN;
+    addRow(isNaN(lastY)?birthYear()+20:lastY+2,'',1,false).querySelector('.ev').focus();
+    refresh();
+  };
+  document.getElementById('addPlanBtn').onclick=function(){
+    var last=plansEl.lastElementChild;
+    var lastY=last?parseInt(last.querySelector('.yr').value,10):NaN;
+    addRow(isNaN(lastY)?birthYear()+32:lastY+2,'',1,true).querySelector('.ev').focus();
+    refresh();
+  };
+
+  function readRows(host,plan){
     var out=[];
-    rowsEl.querySelectorAll('.row').forEach(function(row){
+    host.querySelectorAll('.row').forEach(function(row){
       var yr=parseInt(row.querySelector('.yr').value,10);
       var ev=row.querySelector('.ev').value.trim();
       var dir=row.querySelector('.dir').classList.contains('up')?1:-1;
-      if(!yr||yr<1900||yr>2100) return;
-      if(!ev) return;
-      var w=0, hit=false;
-      for(var i=0;i<WORDS.length;i++){
-        if(ev.indexOf(WORDS[i][0])>=0){ w+=WORDS[i][1]; hit=true; }
-      }
-      if(!hit) w=dir*4;
-      out.push({y:yr,t:ev,dir:dir,w:w});
+      if(!yr||yr<1940||yr>2100||!ev) return;
+      var w=weightOf(ev);
+      out.push({y:yr,t:ev,dir:dir,w:w===null?dir*4:w,future:!!plan});
     });
-    out.sort(function(a,b){ return a.y-b.y; });
     return out;
   }
-
-  /* ── K线数据 ── */
-  function buildSeries(list){
-    var years={};
-    list.forEach(function(e){ (years[e.y]=years[e.y]||{open:0,close:0,pos:0,neg:0,events:[]}); years[e.y].events.push(e); });
-    var ys=Object.keys(years).map(Number).sort(function(a,b){return a-b;});
-    var v=100, series=[];
-    ys.forEach(function(y){
-      var g=years[y], open=v, pos=0, neg=0;
-      g.events.forEach(function(e){ if(e.w>=0) pos+=e.w; else neg+=e.w; });
-      var close=open+pos+neg;
-      series.push({y:y,open:open,close:close,high:Math.max(open,open+pos),low:Math.min(close,open+neg),events:g.events});
-      v=close;
-    });
-    return series;
+  function allEvents(){
+    var list=[];
+    Object.keys(commonState).forEach(function(k){ list.push(commonState[k]); });
+    list=list.concat(readRows(rowsEl,false)).concat(readRows(plansEl,true));
+    list.sort(function(a,b){ return a.y-b.y; });
+    return list;
   }
 
-  /* ── 画图（可画进任意 ctx，供预览与导出复用） ── */
-  function drawChart(c,W,H,series,dark){
+  /* ── K线序列：过去实线 + 未来虚线 ── */
+  function buildSeries(list){
+    var years={};
+    list.forEach(function(e){ (years[e.y]=years[e.y]||{open:0,pos:0,neg:0,events:[]}); years[e.y].events.push(e); });
+    var ys=Object.keys(years).map(Number).sort(function(a,b){return a-b;});
+    var v=100, series=[], firstFutureYear=null;
+    ys.forEach(function(y){
+      var g=years[y];
+      var isFuture=g.events.some(function(e){return e.future;});
+      if(isFuture&&firstFutureYear===null) firstFutureYear=y;
+      var open=v, pos=0, neg=0;
+      g.events.forEach(function(e){ if(e.w>=0) pos+=e.w; else neg+=e.w; });
+      var close=open+pos+neg;
+      series.push({y:y,open:open,close:close,high:Math.max(open,open+pos),low:Math.min(close,open+neg),events:g.events,future:isFuture});
+      v=close;
+    });
+    return {series:series, firstFutureYear:firstFutureYear};
+  }
+
+  /* ── 画图 ── */
+  function drawChart(c,W,H,series,firstFutureYear,dark){
     var bg=dark?'#10141C':'#141922', grid=dark?'rgba(255,255,255,.07)':'rgba(0,0,0,.08)';
     var fg=dark?'#E8ECF3':'#F2EFE6', sub=dark?'#8B93A3':'#5A5A64';
     c.fillStyle=bg; c.fillRect(0,0,W,H);
     if(!series.length){
       c.fillStyle=sub; c.font='26px '+SANS; c.textAlign='center'; c.textBaseline='middle';
-      c.fillText('左边记下第一件大事，这里就开始画', W/2, H/2);
+      c.fillText('点几下左边的大事，这里就开始画', W/2, H/2);
       return;
     }
-    var padL=64,padR=26,padT=34,padB=44;
+    var padL=64,padR=26,padT=36,padB=44;
     var iw=W-padL-padR, ih=H-padT-padB;
     var minY=series[0].y, maxY=series[series.length-1].y;
     if(maxY-minY<4) maxY=minY+4;
@@ -215,7 +335,7 @@
     lo-=span*0.12; hi+=span*0.12;
     function X(y){ return padL+(y-minY)/(maxY-minY)*iw; }
     function Y(v){ return padT+(hi-v)/(hi-lo)*ih; }
-    // 网格 + 坐标
+    // 网格
     c.strokeStyle=grid; c.lineWidth=1; c.fillStyle=sub; c.font='20px '+MONO; c.textAlign='right'; c.textBaseline='middle';
     for(var i=0;i<=4;i++){
       var v=lo+(hi-lo)*i/4, y=Y(v);
@@ -224,8 +344,15 @@
     }
     c.textAlign='center'; c.textBaseline='top';
     var step=Math.max(1,Math.ceil((maxY-minY)/8));
-    for(var y2=Math.ceil(minY/step)*step; y2<=maxY; y2+=step){
-      c.fillText(y2+'',X(y2),H-padB+12);
+    for(var y2=Math.ceil(minY/step)*step; y2<=maxY; y2+=step) c.fillText(y2+'',X(y2),H-padB+12);
+    // 今天分隔线（未来段起点）
+    if(firstFutureYear!==null&&firstFutureYear>minY){
+      var fx=X(firstFutureYear);
+      c.strokeStyle='#B9A6E8'; c.lineWidth=2; c.setLineDash([6,6]);
+      c.beginPath(); c.moveTo(fx,padT-8); c.lineTo(fx,H-padB); c.stroke();
+      c.setLineDash([]);
+      c.fillStyle='#B9A6E8'; c.font='18px '+SANS; c.textAlign='left'; c.textBaseline='bottom';
+      c.fillText('← 已发生 ｜ 计划中 →', padL+6, padT-12);
     }
     // 蜡烛
     var bw=Math.max(6,Math.min(34,iw/Math.max(8,(maxY-minY+1))*0.56));
@@ -236,124 +363,127 @@
       c.beginPath(); c.moveTo(x,Y(s.high)); c.lineTo(x,Y(s.low)); c.stroke();
       var yO=Y(s.open), yC=Y(s.close);
       var top=Math.min(yO,yC), h=Math.max(3,Math.abs(yC-yO));
-      if(up){ c.fillStyle=dark?'#E0433B':'#C0392B'; c.fillRect(x-bw/2,top,bw,h); }
-      else { c.fillStyle=dark?'#0E8A4E':'#0A6B3D'; c.fillRect(x-bw/2,top,bw,h); }
+      if(s.future){
+        c.globalAlpha=0.45; c.fillRect(x-bw/2,top,bw,h); c.globalAlpha=1;
+        c.setLineDash([4,3]); c.lineWidth=2; c.strokeRect(x-bw/2,top,bw,h); c.setLineDash([]);
+      } else {
+        c.fillStyle=up?'#E0433B':'#0E8A4E';
+        c.fillRect(x-bw/2,top,bw,h);
+      }
     });
-    // 五年均线
-    if(series.length>=2){
+    // 五年均线（只基于过去）
+    var past=series.filter(function(s){return !s.future;});
+    if(past.length>=2){
       c.strokeStyle='#E8B93B'; c.lineWidth=2.5; c.beginPath();
       var started=false;
-      series.forEach(function(s,i){
-        var from=Math.max(0,i-4);
-        var sum=0; for(var k=from;k<=i;k++) sum+=series[k].close;
+      past.forEach(function(s,i){
+        var from=Math.max(0,i-4), sum=0;
+        for(var k=from;k<=i;k++) sum+=past[k].close;
         var ma=sum/(i-from+1);
-        var px=X(s.y), py=Y(ma);
-        if(!started){ c.moveTo(px,py); started=true; } else c.lineTo(px,py);
+        if(!started){ c.moveTo(X(s.y),Y(ma)); started=true; } else c.lineTo(X(s.y),Y(ma));
       });
       c.stroke();
     }
-    // 事件标注（最多 8 个，均匀取样）
+    // 事件标注
     c.font='19px '+SANS; c.textBaseline='bottom';
-    var idxs=[]; var stride=Math.max(1,Math.ceil(series.length/8));
+    var idxs=[], stride=Math.max(1,Math.ceil(series.length/8));
     for(var i3=0;i3<series.length;i3+=stride) idxs.push(i3);
     idxs.forEach(function(i){
       var s=series[i];
       var txt=s.events[0].t;
       if(txt.length>7) txt=txt.slice(0,7)+'…';
-      c.fillStyle=fg;
+      c.fillStyle=s.future?'#B9A6E8':fg;
       var ax=X(s.y), tx=ax, align='center';
       if(ax<padL+56){ align='left'; tx=padL; }
       else if(ax>W-padR-56){ align='right'; tx=W-padR; }
       c.textAlign=align;
       var ty=Y(s.high)-10;
-      if(ty<24) ty=Y(s.low)+26;
+      if(ty<26) ty=Y(s.low)+26;
       c.fillText(txt,tx,ty);
     });
   }
-  var SANS='-apple-system,"PingFang SC","Microsoft YaHei",sans-serif';
-  var MONO='ui-monospace,Menlo,Consolas,monospace';
 
-  /* ── 刷新 ── */
-  function refresh(){
-    var list=readEvents();
-    var series=buildSeries(list);
-    drawChart(ctx,chart.width,chart.height,series,true);
-    // 统计
-    var upN=series.filter(function(s){return s.close>=s.open;}).length;
-    var dnN=series.length-upN;
-    document.getElementById('s-years').textContent=list.length?Math.round(series[series.length-1].y-series[0].y):'0';
-    document.getElementById('s-up').textContent=upN;
-    document.getElementById('s-down').textContent=dnN;
-    var peak=-Infinity,dd=0;
-    series.forEach(function(s){ peak=Math.max(peak,s.high); dd=Math.max(dd,peak-s.low); });
-    document.getElementById('s-dd').textContent=list.length?(dd/Math.max(1,peak)*100).toFixed(0)+'%':'–';
-    // 解读
-    sumText.textContent=summarize(series,list);
-    current={series:series,list:list};
-  }
-  var current={series:[],list:[]};
-
-  function summarize(series,list){
-    if(!series.length) return '还没有大事可画。左边写上第一件，K线就开始了。';
+  /* ── 解读文案 ── */
+  function summarizePast(series){
+    if(!series.length) return '还没有大事可画。左边点几件大事，K线就开始了。';
     var first=series[0].open, last=series[series.length-1].close;
-    var total=((last-first)/first*100);
+    var total=(last-first)/first*100;
     var upN=series.filter(function(s){return s.close>=s.open;}).length;
-    var shape = total>60?'长牛':total>20?'慢牛':total>-10?'震荡':total>-40?'回调':'深蹲';
-    var tail = total>=0?'总体向上，趋势没坏':'有过一段下坡，但K线还在画';
+    var shape=total>60?'长牛':total>20?'慢牛':total>-10?'震荡':total>-40?'回调':'深蹲';
+    var tail=total>=0?'总体向上，趋势没坏':'有过一段下坡，但K线还在画';
     var worst=series[0],best=series[0];
     series.forEach(function(s){ if(s.close-s.open<worst.close-worst.open) worst=s; if(s.close-s.open>best.close-best.open) best=s; });
-    return '共 '+list.length+' 件大事、'+Math.round(series[series.length-1].y-series[0].y)+' 年，累计'+ (total>=0?'涨':'跌') +Math.abs(total).toFixed(0)+'%，'+upN+' 根阳线。走势「'+shape+'」，'+tail+'。最低谷在 '+worst.y+'（'+worst.events[0].t.slice(0,10)+'），最高光在 '+best.y+'（'+best.events[0].t.slice(0,10)+'）。';
+    return '已发生 '+series.length+' 根年线、'+Math.round(series[series.length-1].y-series[0].y)+' 年，累计'+(total>=0?'涨':'跌')+Math.abs(total).toFixed(0)+'%，'+upN+' 根阳线。走势「'+shape+'」，'+tail+'。最低谷在 '+worst.y+'（'+worst.events[0].t.slice(0,12)+'），最高光在 '+best.y+'（'+best.events[0].t.slice(0,12)+'）。';
+  }
+  function summarizeFuture(series){
+    var fut=series.filter(function(s){return s.future;});
+    if(!fut.length) return '还没填未来计划。左边 STEP 3 加一个——虚线画到哪里，你这段时间的剧情就写到哪里。';
+    var next=fut[0];
+    var gap=next.y-new Date().getFullYear();
+    var when=gap<=0?'今年':gap===1?'明年':gap+' 年后';
+    return '接下来你计划了 '+fut.length+' 件大事，最近的一站是 '+when+'的《'+next.events[0].t.slice(0,14)+'》。实线是已经发生的，虚线是你准备画的——下一段K线的涨跌，执笔的人是你。';
   }
 
-  addBtn.onclick=function(){
-    var last=rowsEl.lastElementChild;
-    var lastY=last?parseInt(last.querySelector('.yr').value,10):NaN;
-    var y=isNaN(lastY)?2000:(lastY+2);
-    var row=addRow(y,'',1);
-    row.querySelector('.ev').focus();
-    refresh();
-  };
+  /* ── 刷新 ── */
+  var current={series:[],list:[],firstFutureYear:null};
+  function refresh(){
+    var list=allEvents();
+    var built=buildSeries(list);
+    current={series:built.series, list:list, firstFutureYear:built.firstFutureYear};
+    drawChart(ctx,chart.width,chart.height,built.series,built.firstFutureYear,true);
+    var past=built.series.filter(function(s){return !s.future;});
+    document.getElementById('s-years').textContent=past.length?Math.round(past[past.length-1].y-past[0].y):'0';
+    document.getElementById('s-up').textContent=past.filter(function(s){return s.close>=s.open;}).length;
+    document.getElementById('s-down').textContent=past.filter(function(s){return s.close<s.open;}).length;
+    var peak=-Infinity,dd=0;
+    past.forEach(function(s){ peak=Math.max(peak,s.high); dd=Math.max(dd,peak-s.low); });
+    document.getElementById('s-dd').textContent=past.length?(dd/Math.max(1,peak)*100).toFixed(0)+'%':'–';
+    pastText.textContent=summarizePast(past);
+    futureText.textContent=summarizeFuture(built.series);
+  }
 
   /* ── 导出长图 ── */
   document.getElementById('saveBtn').onclick=function(){
-    if(!current.series.length){ toast('先记几件大事再保存'); return; }
-    var W=1080,H=1500;
+    if(!current.series.length){ toast('先点几件大事再保存'); return; }
+    var W=1080,H=1560;
     var pc=document.createElement('canvas'); pc.width=W; pc.height=H;
     var c=pc.getContext('2d');
-    // 纸面
     c.fillStyle='#F4F1E8'; c.fillRect(0,0,W,H);
     c.fillStyle='#16161A'; c.font='800 54px '+SANS; c.textAlign='left'; c.textBaseline='alphabetic';
     c.fillText('人生K线', 64, 96);
     c.font='24px '+MONO; c.fillStyle='#5A5A64';
-    c.fillText('LIFE K-LINE · 大事记 · 涨跌可见', 64, 132);
-    // 印章
-    c.save(); c.translate(W-210,86); c.rotate(0.06);
-    c.strokeStyle='#C0392B'; c.lineWidth=4; c.strokeRect(-90,-34,180,52);
+    c.fillText(birthYear()+' 年生 · 大事记 · 涨跌可见', 64, 132);
+    c.save(); c.translate(W-212,86); c.rotate(0.06);
+    c.strokeStyle='#C0392B'; c.lineWidth=4; c.strokeRect(-92,-34,184,52);
     c.fillStyle='#C0392B'; c.font='700 26px '+SANS; c.textAlign='center'; c.textBaseline='middle';
     c.fillText('复盘存档', 0, -8); c.restore();
-    // 图表屏（平移到正确位置后绘制）
-    c.save(); c.translate(64,180); drawChart(c,W-128,760,current.series,true); c.restore();
-    // 统计行
-    var st=[['覆盖年数',Math.round(current.series[current.series.length-1].y-current.series[0].y)],
-      ['大事数',current.list.length],
-      ['阳线年数',current.series.filter(function(s){return s.close>=s.open;}).length],
-      ['累计',( (current.series[current.series.length-1].close-current.series[0].open)/current.series[0].open*100 ).toFixed(0)+'%']];
+    c.save(); c.translate(64,180); drawChart(c,W-128,780,current.series,current.firstFutureYear,true); c.restore();
+    var past=current.series.filter(function(s){return !s.future;});
+    var upN=past.filter(function(s){return s.close>=s.open;}).length;
+    var total=((past[past.length-1].close-past[0].open)/past[0].open*100);
+    var st=[['覆盖年数',Math.round(past[past.length-1].y-past[0].y)],['大事数',current.list.length],
+      ['阳线年数',upN],['累计',(total>=0?'+':'')+total.toFixed(0)+'%']];
     var sx=64;
     st.forEach(function(it){
       c.fillStyle='#FFFDF6'; c.strokeStyle='#16161A'; c.lineWidth=3;
-      c.beginPath(); c.roundRect?c.roundRect(sx,980,220,110,14):c.rect(sx,980,220,110); c.stroke(); c.fill();
-      c.fillStyle='#16161A'; c.font='800 40px '+MONO; c.textAlign='center'; c.textBaseline='alphabetic';
-      c.fillText(String(it[1]), sx+110, 1038);
-      c.fillStyle='#5A5A64'; c.font='22px '+SANS;
-      c.fillText(it[0], sx+110, 1072);
+      c.beginPath(); if(c.roundRect) c.roundRect(sx,1000,220,108,14); else c.rect(sx,1000,220,108); c.stroke(); c.fill();
+      c.fillStyle='#16161A'; c.font='800 38px '+MONO; c.textAlign='center'; c.textBaseline='alphabetic';
+      c.fillText(String(it[1]), sx+110, 1056);
+      c.fillStyle='#5A5A64'; c.font='21px '+SANS;
+      c.fillText(it[0], sx+110, 1088);
       sx+=236;
     });
-    // 解读
-    c.fillStyle='#16161A'; c.font='26px '+SANS; c.textAlign='left'; c.textBaseline='alphabetic';
-    wrapText(c, sumText.textContent, 64, 1140, W-128, 42, 5);
-    // 脚注
-    c.fillStyle='#9B9BA5'; c.font='20px '+MONO;
-    c.fillText('只记录已发生的事，不预测运势 · 本机生成 · 使用 WorkBuddy 制作', 64, 1440);
+    c.textAlign='left';
+    c.fillStyle='#16161A'; c.font='700 22px '+SANS;
+    c.fillText('已发生', 64, 1168);
+    c.font='24px '+SANS; c.fillStyle='#2A2A32';
+    wrapText(c, pastText.textContent, 64, 1210, W-128, 40, 3);
+    c.fillStyle='#5B3FC4'; c.font='700 22px '+SANS;
+    c.fillText('下一段 · 由你执笔', 64, 1352);
+    c.font='24px '+SANS; c.fillStyle='#2A2A32';
+    wrapText(c, futureText.textContent, 64, 1394, W-128, 40, 3);
+    c.fillStyle='#9B9BA5'; c.font='19px '+MONO;
+    c.fillText('只记录已发生的事，不预测运势 · 本机生成 · 使用 WorkBuddy 制作', 64, 1516);
     try{
       pc.toBlob(function(blob){
         if(!blob){ toast('导出失败，请重试'); return; }
@@ -376,8 +506,20 @@
     lines.slice(0,maxLines).forEach(function(l,k){ c.fillText(l,x,y+k*lh); });
   }
 
-  /* ── 初始示例 ── */
-  DEMO.forEach(function(d){ addRow(d[0],d[1],1); });
+  /* ── 初始示例：点选几件 + 一条自选 + 一条计划 ── */
+  ['感情|初恋','感情|分手','感情|结婚','学业事业|毕业','学业事业|第一份工作','学业事业|涨薪','成长|买房','成长|搬家'].forEach(function(k){
+    var parts=k.split('|');
+    COMMON.forEach(function(g){ if(g[0]===parts[0]) g[1].forEach(function(it){ if(it[0]===parts[1]){ var w=weightOf(it[0]); commonState[k]={y:1990+it[1],t:it[0],dir:it[2],w:w===null?it[2]*4:w}; } }); });
+  });
+  groupsEl.querySelectorAll('.grp').forEach(function(box){
+    var gt=box.querySelector('.gt').textContent;
+    box.querySelectorAll('.chip').forEach(function(chip){
+      var name=chip.textContent.replace(/\d+岁$/,'');
+      if(commonState[gt+'|'+name]) chip.classList.add('on');
+    });
+  });
+  addRow(2021,'被裁员，躺了半年',-1,false);
+  addRow(2028,'换一座城市，做想做的事',1,true);
   refresh();
 })();
 </script>
